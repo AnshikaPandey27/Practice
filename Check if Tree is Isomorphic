@@ -1,0 +1,30 @@
+Meaning of isomorphic: if one tree can be obtained from other by swapping the nodes.
+class Solution{
+  public:
+
+//recursive code
+
+  int code(Node *root1,Node *root2)
+  {
+      if(root1==NULL && root2==NULL)
+      return 1;
+      if(root1==NULL || root2==NULL)
+      return 0;
+      if(root1->data !=root2->data)
+      return 0;
+      if((code(root1->left,root2->left)&&code(root1->right,root2->right))||
+      (code(root1->left,root2->right)&&code(root1->right,root2->left)))
+      return 1;
+  }
+
+    // Return True if the given trees are isomorphic. Else return False.
+
+    bool isIsomorphic(Node *root1,Node *root2)
+    {
+        int ans=code(root1,root2);
+        if(ans==1)
+        return true;
+        else
+        return false;
+    }
+};
