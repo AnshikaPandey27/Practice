@@ -1,0 +1,38 @@
+Technique used: DFS traversal over connected components [matrix]
+Note: not used a visited matrix since it is not required as we are not visiting the index which has same color in 3rd if statement
+
+class Solution {
+public:
+void dfs(vector<vector<int>>& image, int i, int j, int newcolor,int initialcolor)
+{
+    int m=image.size();//for rows
+    int n=image[0].size();//for columns
+
+  /*basic check conditions*/
+  
+    if(i<0||j<0)
+    return;
+    if(i>=m||j>=n)
+    return;
+  
+  // condition given in question
+  
+    if(image[i][j]!=initialcolor)
+    return;
+    image[i][j]=newcolor;
+
+  //recursive calls in matrix
+  
+    dfs( image,i-1,j,newcolor,initialcolor);
+    dfs(image,i+1,j,newcolor,initialcolor);
+    dfs(image,i,j-1,newcolor,initialcolor);
+    dfs(image,i,j+1,newcolor,initialcolor);
+}
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        
+        int initialcolor=image[sr][sc];
+        if(initialcolor!=color)//imp condition else it gives error
+        dfs( image, sr,sc, color,initialcolor);
+        return image;
+    }
+};
